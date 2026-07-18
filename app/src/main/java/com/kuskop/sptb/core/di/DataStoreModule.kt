@@ -17,7 +17,7 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    @Named("encrypted_prefs")
+    @EncryptedPrefs
     fun provideEncryptedSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
         val masterKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
