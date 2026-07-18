@@ -109,9 +109,7 @@ dependencies {
     implementation("com.google.maps.android:maps-compose:6.4.1")
     implementation("com.google.android.libraries.places:places:4.1.0")
 
-    // Google Drive
-    implementation("com.google.api-client:google-api-client-android:2.7.2")
-    implementation("com.google.apis:google-api-services-drive:v3-rev20240806-2.0.0")
+    // Google Drive - use REST API via Retrofit directly
 
     // Charts - Vico
     implementation("com.patrykandpatrick.vico:compose:2.0.0-beta.2")
@@ -133,8 +131,8 @@ dependencies {
     // Image Loading
     implementation("io.coil-kt:coil-compose:2.7.0")
 
-    // PDF Viewer
-    implementation("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+    // PDF viewing - use Android's built-in PdfRenderer via Intent
+    // or open with external PDF viewer app (ACTION_VIEW)
 
     // Gson
     implementation("com.google.code.gson:gson:2.11.0")
