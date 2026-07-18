@@ -34,12 +34,8 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    @Named("regular_prefs")
+    @RegularPrefs
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
         return context.getSharedPreferences("sptb_prefs", Context.MODE_PRIVATE)
     }
 }
-
-@javax.inject.Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class Named(val value: String)
