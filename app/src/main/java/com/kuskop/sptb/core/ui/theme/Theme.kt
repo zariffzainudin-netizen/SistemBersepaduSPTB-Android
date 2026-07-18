@@ -37,7 +37,7 @@ val DarkColors = darkColorScheme(
     surfaceVariant = Color(0xFF334155),
 )
 
-val StatusColors = StatusColors(
+val statusColors = StatusColors(
     sokong = Color(0xFF10B981),
     tidakDisokong = Color(0xFFEF4444),
     siasat = Color(0xFFF59E0B),

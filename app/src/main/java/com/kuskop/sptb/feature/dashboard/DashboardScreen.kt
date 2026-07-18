@@ -128,24 +128,24 @@ private fun DashboardStatCards(data: DashboardData) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        StatCard("\uD83D\uDCC8", "${data.total}", "JUMLAH", MaterialTheme.colorScheme.primary)
-        StatCard("\u2705", "${data.lulus}", "LULUS", Color(0xFF22C55E))
-        StatCard("\u274C", "${data.tolak}", "TOLAK", Color(0xFFEF4444))
+        StatCard("\uD83D\uDCC8", "${data.total}", "JUMLAH", MaterialTheme.colorScheme.primary, Modifier.weight(1f))
+        StatCard("\u2705", "${data.lulus}", "LULUS", Color(0xFF22C55E), Modifier.weight(1f))
+        StatCard("\u274C", "${data.tolak}", "TOLAK", Color(0xFFEF4444), Modifier.weight(1f))
     }
     Spacer(modifier = Modifier.height(8.dp))
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        StatCard("\u23F3", "${data.proses}", "PROSES", Color(0xFFF59E0B))
-        StatCard("\u26A0\uFE0F", "${data.incompleteDoc}", "T_LENGKAP", Color(0xFFF97316))
+        StatCard("\u23F3", "${data.proses}", "PROSES", Color(0xFFF59E0B), Modifier.weight(1f))
+        StatCard("\u26A0\uFE0F", "${data.incompleteDoc}", "T_LENGKAP", Color(0xFFF97316), Modifier.weight(1f))
     }
 }
 
 @Composable
-private fun StatCard(emoji: String, value: String, label: String, color: Color) {
+private fun StatCard(emoji: String, value: String, label: String, color: Color, modifier: Modifier = Modifier) {
     Card(
-        modifier = Modifier.weight(1f),
+        modifier = modifier,
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = color),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),

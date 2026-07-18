@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.biometric.BiometricManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 
@@ -57,8 +58,8 @@ fun BiometricScreen(
             .setSubtitle("Sahkan identiti anda")
             .setNegativeButtonText("Guna Google Sign-In")
             .setAllowedAuthenticators(
-                android.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG or
-                        android.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                BiometricManager.Authenticators.BIOMETRIC_STRONG or
+                        BiometricManager.Authenticators.DEVICE_CREDENTIAL
             )
             .build()
 

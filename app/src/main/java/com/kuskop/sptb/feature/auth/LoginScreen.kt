@@ -1,5 +1,6 @@
 package com.kuskop.sptb.feature.auth
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -140,9 +141,9 @@ fun rememberLauncherForActivityResult(
     contract: androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult,
     onResult: (androidx.activity.result.ActivityResult) -> Unit
 ): androidx.activity.result.ActivityResultLauncher<android.content.Intent> {
+    val activity = (androidx.compose.ui.platform.LocalContext.current as? androidx.fragment.app.FragmentActivity)
     return androidx.compose.runtime.remember {
-        (androidx.compose.ui.platform.LocalContext.current as? androidx.fragment.app.FragmentActivity)
-            ?.activityResultRegistry
+        activity?.activityResultRegistry
             ?.register(
                 "google_sign_in_launcher",
                 contract
