@@ -7,7 +7,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -22,7 +25,7 @@ fun LoginScreen(
     onGoogleSignInSuccess: (email: String, name: String, idToken: String) -> Unit,
     isLoggingIn: Boolean,
 ) {
-    val context = androidx.compose.ui.platform.LocalContext.current
+    val context = LocalContext.current
 
     val gso = remember {
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -34,7 +37,7 @@ fun LoginScreen(
     val googleSignInClient = remember { GoogleSignIn.getClient(context, gso) }
 
     val launcher = rememberLauncherForActivityResult(
-        contract = androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()
+        contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
         try {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -136,18 +139,4 @@ fun LoginScreen(
     }
 }
 
-@Composable
-fun rememberLauncherForActivityResult(
-    contract: androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult,
-    onResult: (androidx.activity.result.ActivityResult) -> Unit
-): androidx.activity.result.ActivityResultLauncher<android.content.Intent> {
-    val activity = (androidx.compose.ui.platform.LocalContext.current as? androidx.fragment.app.FragmentActivity)
-    return androidx.compose.runtime.remember {
-        activity?.activityResultRegistry
-            ?.register(
-                "google_sign_in_launcher",
-                contract
-            ) { result -> onResult(result) }
-            ?: error("FragmentActivity required")
-    }
-}
+
