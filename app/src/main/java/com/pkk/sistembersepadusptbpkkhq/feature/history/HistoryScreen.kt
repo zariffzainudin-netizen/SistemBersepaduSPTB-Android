@@ -8,8 +8,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.ui.graphics.Color
-
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -30,17 +31,22 @@ fun HistoryScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Sejarah Permohonan") },
+                actions = {
+                    if (isLoading) {
+                        CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
+                    } else {
+                        IconButton(onClick = { viewModel.loadHistory() }) {
+                            Icon(Icons.Default.Refresh, contentDescription = "Muat semula")
+                        }
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                 ),
             )
         }
     ) { padding ->
-        PullToRefreshBox(
-            isRefreshing = isLoading,
-            onRefresh = { viewModel.loadHistory() },
-            modifier = Modifier.fillMaxSize().padding(padding),
-        ) {
+        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
             Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
                 FilterRow(
                     statusFilter = statusFilter,
