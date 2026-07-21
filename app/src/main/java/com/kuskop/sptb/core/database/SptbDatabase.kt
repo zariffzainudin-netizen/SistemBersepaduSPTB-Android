@@ -29,9 +29,9 @@ abstract class SptbDatabase : RoomDatabase() {
     companion object {
         const val DB_NAME = "sptb_database"
 
-        fun create(): SptbDatabase {
+        fun create(context: android.content.Context): SptbDatabase {
             return Room.databaseBuilder(
-                SptbApplicationHolder.context,
+                context,
                 SptbDatabase::class.java,
                 DB_NAME
             )

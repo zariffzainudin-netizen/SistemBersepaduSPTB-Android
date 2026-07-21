@@ -19,7 +19,7 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): SptbDatabase {
-        return SptbDatabase.create()
+        return SptbDatabase.create(context)
     }
 
     @Provides

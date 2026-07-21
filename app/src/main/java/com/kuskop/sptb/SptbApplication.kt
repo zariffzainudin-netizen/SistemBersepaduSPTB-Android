@@ -4,12 +4,14 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.kuskop.sptb.core.database.SptbApplicationHolder
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class SptbApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        SptbApplicationHolder.context = this
         createNotificationChannels()
     }
 
