@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -26,10 +26,7 @@ fun HistoryScreen(
     val statusFilter by viewModel.statusFilter.collectAsState()
     val jenisFilter by viewModel.jenisFilter.collectAsState()
 
-    val pullToRefreshState = rememberPullToRefreshState()
-
     Scaffold(
-        modifier = Modifier.nestedScroll(pullToRefreshState.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text("Sejarah Permohonan") },
@@ -39,7 +36,11 @@ fun HistoryScreen(
             )
         }
     ) { padding ->
-        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
+        PullToRefreshBox(
+            isRefreshing = isLoading,
+            onRefresh = { viewModel.loadHistory() },
+            modifier = Modifier.fillMaxSize().padding(padding),
+        ) {
             Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
                 FilterRow(
                     statusFilter = statusFilter,
@@ -76,13 +77,6 @@ fun HistoryScreen(
                             HistoryItemCard(app)
                         }
                     }
-                }
-            }
-
-            if (pullToRefreshState.isRefreshing) {
-                LaunchedEffect(true) {
-                    viewModel.loadHistory()
-                    pullToRefreshState.endRefresh()
                 }
             }
         }
