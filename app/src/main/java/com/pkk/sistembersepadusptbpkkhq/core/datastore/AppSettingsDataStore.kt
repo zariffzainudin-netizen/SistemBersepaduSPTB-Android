@@ -25,6 +25,10 @@ class AppSettingsDataStore @Inject constructor(
         get() = prefs.getString(KEY_LAST_SEEN_VERSION, null)
         set(value) = prefs.edit().putString(KEY_LAST_SEEN_VERSION, value).apply()
 
+    var notificationsEnabled: Boolean
+        get() = prefs.getBoolean(KEY_NOTIFICATIONS_ENABLED, true)
+        set(value) = prefs.edit().putBoolean(KEY_NOTIFICATIONS_ENABLED, value).apply()
+
     fun clearCache() {
         prefs.edit().clear().apply()
     }
@@ -34,5 +38,6 @@ class AppSettingsDataStore @Inject constructor(
         const val KEY_DYNAMIC_COLOR = "dynamic_color"
         const val KEY_SFX_VOLUME = "sfx_volume"
         const val KEY_LAST_SEEN_VERSION = "last_seen_version"
+        const val KEY_NOTIFICATIONS_ENABLED = "notifications_enabled"
     }
 }

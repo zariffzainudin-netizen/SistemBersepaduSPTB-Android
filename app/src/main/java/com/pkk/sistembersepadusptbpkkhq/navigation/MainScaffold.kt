@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.pkk.sistembersepadusptbpkkhq.feature.dashboard.DashboardScreen
 import com.pkk.sistembersepadusptbpkkhq.feature.inbox.InboxScreen
+import com.pkk.sistembersepadusptbpkkhq.feature.lagi.LagiScreen
 import com.pkk.sistembersepadusptbpkkhq.feature.list.ApplicationListScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,6 +66,9 @@ fun MainScaffold(navController: NavHostController) {
             composable(NavRoutes.DASHBOARD) { DashboardScreen() }
             composable(NavRoutes.SENARAI) { ApplicationListScreen() }
             composable(NavRoutes.INBOX) { InboxScreen() }
+            composable("lagi") {
+                LagiScreen(onNavigate = { route -> navController.navigate(route) })
+            }
         }
     }
 }
