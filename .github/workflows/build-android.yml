@@ -32,6 +32,22 @@ jobs:
       - name: Give gradlew execute permission
         run: chmod +x gradlew
 
+      - name: Print debug keystore SHA-1 for Google OAuth
+        run: |
+          mkdir -p ~/.android
+          if [ ! -f ~/.android/debug.keystore ]; then
+            keytool -genkey -v -keystore ~/.android/debug.keystore \
+              -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 365 \
+              -storepass android -keypass android \
+              -dname "CN=Android Debug,O=Android,C=US"
+          fi
+          echo "::notice::DEBUG KEYSTORE SHA-1 FINGERPRINT (register in Google Cloud Console)"
+          SHA1=$(keytool -list -v -keystore ~/.android/debug.keystore \
+            -alias androiddebugkey -storepass android 2>/dev/null | \
+            grep "SHA1:" | awk '{print $2}')
+          echo "SHA1=$SHA1"
+          echo "::notice title=Google OAuth SHA-1::$SHA1"
+
       - name: Build Debug APK
         run: ./gradlew assembleDebug
 
