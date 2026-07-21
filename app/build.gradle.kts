@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.kuskop.sptb"
+    namespace = "com.pkk.sistembersepadusptbpkkhq"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.kuskop.sptb"
+        applicationId = "com.pkk.sistembersepadusptbpkkhq"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
