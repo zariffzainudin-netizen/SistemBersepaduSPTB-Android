@@ -39,7 +39,7 @@ class SptbApplication : Application() {
                 }
             } catch (_: Exception) {
             } finally {
-                defaultHandler?.unhandledException(thread, throwable)
+                defaultHandler?.uncaughtException(thread, throwable)
             }
         }
     }

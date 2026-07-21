@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     val authViewModel: AuthViewModel = hiltViewModel()
                     val authState by authViewModel.authState.collectAsState()
                     val isLoggingIn by authViewModel.isLoggingIn.collectAsState()
-                    val navController = remember { rememberNavController() }
+                    val navController = rememberNavController()
 
                     val startDest = when (authState) {
                         is AuthState.NeedsBiometric -> NavRoutes.BIOMETRIC
